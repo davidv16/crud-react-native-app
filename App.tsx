@@ -1,46 +1,81 @@
+/* imports */
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
+import uuid from 'react-native-uuid';
 
-// components import
+
+/* interfaces */
+import { Entity } from './src/models/entity';
+
+/* components import */
 import ListScreen from './src/components/ListScreen';
 
-// data import
-import { Entities } from './src/data/Entities';
+/* data import */
+import * as listEntities from './data.json';
+import { entitiesData } from './entities'
 
 export default function App() {
-  /* Actions */
 
   /* Global Variables */
-  let data: string[] = [];
-  
+  const [entities, setEntities] = useState<Entity[]>(entitiesData);
+
+  /* Actions */
+  useEffect(() => {
+
+  }, []);
+
   /* Methods */
 
   /**
-   * @function populateList
+   * @function addEntity
+   * Function to add a new entity.
    */
-  function populateList () {
-    
-
+  function addEntity(entity: Entity) {
+    // spreads the entities array and adds a uuid as a key
+    setEntities([...entities, { ...entity, key: uuid.v4() }]);
   }
 
   /**
-   * @function addEntity
+   * @function copyRandomEntity
+   * Function to get a random item from the entity array and adds it to the array again.
    */
-  function addEntity() {
-    const newEntity = {
-      key: '4',
-      title: 'gitle #4',
-      subtitle: 'subtitle #4'
-    };
-    Entities.push(newEntity);
+  function copyRandomEntity() {
+    // finds a random item in the entities array
+    // and adds it to the entity array.
+    addEntity(entities[Math.floor(Math.random() * entities.length)]);
+  }
+
+  /**
+   * @function deleteEntity
+   * @param id string
+   * Function that deletes an entity from the array by id
+   */
+  function deleteEntity(id: string) {
+    // looks for the entity uuid in the list and deletes it
+    setEntities([...entities.filter(x => x.key !== id)])
   }
 
   /* View */
   return (
     <View style={styles.container}>
-      <ListScreen/>
-      
-    
+      <ListScreen entitiesData={entities} />
+      <Button
+        onPress={() => addEntity({ key: '', title: 'bleh', subtitle: 'subtitle' })}
+        title="Add Entity"
+        color="#841584"
+      />
+      <Button
+        onPress={() => copyRandomEntity()}
+        title="Copy Entity"
+        color="#841584"
+      />
+      <Button
+        onPress={() => deleteEntity('fda66d1c-3312-47a4-92f3-cfa8a3a26886')}
+        title="Delete Entity"
+        color="#841584"
+      />
+
+
     </View>
   );
 }
