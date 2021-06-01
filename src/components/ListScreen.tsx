@@ -1,31 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Thumbnail from './Thumbnail';
+import { Entities } from '../data/Entities';
+import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 const ListScreen = () => {
-  const DATA = [
-    {
-      key: '1',
-      title: 'title #1',
-      subtitle: 'subtitle #1'
-    },
-    {
-      key: '2',
-      title: 'yitle #2',
-      subtitle: 'subtitle #2'
-    },
-    {
-      key: '3',
-      title: 'uitle #3',
-      subtitle: 'subtitle #3'
-    }
-  ];
+  
 
   return (
       <FlatList
-        data={DATA}
+        data={Entities}
         renderItem={({item}) => {
-          return(<>
+          return(
           <View style={styles.container}>
             <Thumbnail
               backgroundColor="black"
@@ -35,7 +21,6 @@ const ListScreen = () => {
             <Text style={styles.textStyle}>{item.title}</Text>
             <Text style={styles.textStyle}>{item.subtitle}</Text>
             </View>
-          </>
           );
           
         }}
