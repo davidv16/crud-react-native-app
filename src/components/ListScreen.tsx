@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Thumbnail from './Thumbnail';
-import { Entities } from '../data/Entities';
+import { Entities } from '../data/Entities.json';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 const ListScreen = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 // components import
@@ -8,10 +8,23 @@ import ListScreen from './src/components/ListScreen';
 import { Entities } from './src/data/Entities';
 
 export default function App() {
+  /* Actions */
+
+  /* Global Variables */
+  let data: string[] = [];
+  
   /* Methods */
 
   /**
-   * @function bleh
+   * @function populateList
+   */
+  function populateList () {
+    
+
+  }
+
+  /**
+   * @function addEntity
    */
   function addEntity() {
     const newEntity = {
