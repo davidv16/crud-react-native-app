@@ -1,8 +1,13 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Header } from 'react-native-elements';
 
 
+/**
+ * @function HeaderMenu
+ * Function to render the Header on top of the app.
+ * @returns A view of the header.
+ */
 export default function HeaderMenu() {
   return (
     <View>
@@ -13,6 +18,3 @@ export default function HeaderMenu() {
 
   );
 }
-
-/* styling for the outcome text */
-const styles = StyleSheet.create({});

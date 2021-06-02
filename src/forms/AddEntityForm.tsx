@@ -1,32 +1,49 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Header, Overlay, Text, Button, Input } from 'react-native-elements';
+import { Overlay, Button, Input } from 'react-native-elements';
 import { Entity } from '../models/entity';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+/* interface for the props to be passed in */
 interface Props {
   visible: boolean,
   setVisible: (arg: boolean) => void
+  addEntity: (arg: Entity) => void
 }
 
-export default function AddEntityForm({ visible, setVisible }: Props) {
-
+/**
+ * @function AddEntityForm
+ * Function to display the Add new Entity Form
+ * @param Props passed down from parent component
+ * @returns Add Entity Modal View
+ */
+export default function AddEntityForm({ visible, setVisible, addEntity }: Props) {
+  /* Hooks to store the text data from the input fields */
   const [title, setTitle] = useState<string>('');
-
   const [subtitle, setSubtitle] = useState<string>('');
 
-
-
+  /**
+   * @function handleSubmit
+   * Function to handle the submission of the Entity form
+   */
   function handleSubmit() {
+    // creates a temp Entity
+    const newEntity: Entity = {
+      key: '',
+      title: title,
+      subtitle: subtitle
+    }
+
+    // passes it up to the add Entity function
+    addEntity(newEntity)
+    // and hides the form modal window again
     setVisible(false);
-    console.log(title);
-    console.log(subtitle);
+    
   }
 
   return (
     <View>
       <Overlay isVisible={visible} onBackdropPress={() => setVisible(false)}>
-        <Text>Hello from Overlay!</Text>
         <Input
           placeholder="title"
           leftIcon={<Icon
@@ -57,5 +74,5 @@ export default function AddEntityForm({ visible, setVisible }: Props) {
   );
 }
 
-/* styling for the outcome text */
+/* styling */
 const styles = StyleSheet.create({});
