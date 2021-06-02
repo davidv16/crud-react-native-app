@@ -2,32 +2,29 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import Thumbnail from './Thumbnail';
 //import { Entities } from '../data/Entities.json';
+import {Entity} from '../models/entity';
+import { Avatar, ListItem } from 'react-native-elements';
 
-interface Props {
-  entitiesData: object[]
-}
-
-const ListScreen = (props: any) => {
-
+export default function(entitiesData: any) {
   return (
-    <FlatList
-      data={props.entitiesData}
-      renderItem={({ item }) => {
-        return (
-          <View style={styles.container}>
-            <Thumbnail
+    <View>
+    {
+      entitiesData.entitiesData.map((entity: any) => (
+        <ListItem key={entity.key} bottomDivider>
+          <Thumbnail
               backgroundColor="black"
               color="white"
-              text={item.title.charAt(0)
+              text={entity.title.charAt(0)
               }
             />
-            <Text style={styles.textStyle}>{item.title}</Text>
-            <Text style={styles.textStyle}>{item.subtitle}</Text>
-          </View>
-        );
-
-      }}
-    />
+          <ListItem.Content>
+            <ListItem.Title>{entity.title}</ListItem.Title>
+            <ListItem.Subtitle>{entity.subtitle}</ListItem.Subtitle>
+          </ListItem.Content>
+        </ListItem>
+      ))
+    }
+    </View>
   );
 };
 
@@ -40,5 +37,3 @@ const styles = StyleSheet.create({
     marginVertical: 6
   }
 });
-
-export default ListScreen;

@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Button } from 'react-native';
 import uuid from 'react-native-uuid';
+import { ThemeProvider } from 'react-native-elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 /* interfaces */
@@ -9,6 +11,7 @@ import { Entity } from './src/models/entity';
 
 /* components import */
 import ListScreen from './src/components/ListScreen';
+import HeaderMenu from './src/components/HeaderMenu';
 
 /* data import */
 import * as listEntities from './data.json';
@@ -57,26 +60,32 @@ export default function App() {
 
   /* View */
   return (
-    <View style={styles.container}>
-      <ListScreen entitiesData={entities} />
-      <Button
-        onPress={() => addEntity({ key: '', title: 'bleh', subtitle: 'subtitle' })}
-        title="Add Entity"
-        color="#841584"
-      />
-      <Button
-        onPress={() => copyRandomEntity()}
-        title="Copy Entity"
-        color="#841584"
-      />
-      <Button
-        onPress={() => deleteEntity('fda66d1c-3312-47a4-92f3-cfa8a3a26886')}
-        title="Delete Entity"
-        color="#841584"
-      />
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <View style={styles.container}>
+          <HeaderMenu/>
+          <ListScreen entitiesData={entities} />
+          <Button
+            onPress={() => addEntity({ key: '', title: 'bleh', subtitle: 'subtitle' })}
+            title="Add Entity"
+            color="#841584"
+          />
+          <Button
+            onPress={() => copyRandomEntity()}
+            title="Copy Entity"
+            color="#841584"
+          />
+          <Button
+            onPress={() => deleteEntity('fda66d1c-3312-47a4-92f3-cfa8a3a26886')}
+            title="Delete Entity"
+            color="#841584"
+          />
 
 
-    </View>
+        </View>
+
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
