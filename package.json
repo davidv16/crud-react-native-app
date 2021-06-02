@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -15,9 +16,12 @@
     "@types/react-dom": "^17.0.5",
     "@types/react-native-elements": "^0.18.0",
     "@types/react-native-uuid": "^2.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "expo": "^41.0.1",
     "expo-status-bar": "~1.0.3",
     "optionator": "^0.9.1",
+    "prettier": "^2.3.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
@@ -37,8 +41,8 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "@types/react-native": "~0.63.2",
-    "@typescript-eslint/eslint-plugin": "^4.25.0",
-    "@typescript-eslint/parser": "^4.25.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.27.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -47,5 +51,15 @@
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0"
   },
-  "private": true
+  "private": true,
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged"
+      }
+  },
+  "lint-staged": {
+      "*.{js,ts,tsx}": [
+          "eslint --fix"
+      ]
+  }
 }
