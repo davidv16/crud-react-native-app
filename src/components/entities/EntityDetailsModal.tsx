@@ -6,10 +6,10 @@ import Thumbnail from '../../elements/Thumbnail';
 
 /* Interface */
 interface Props {
-  visible: boolean,
-  setVisible: (args: boolean) => void,
-  entityItem: Entity,
-  deleteButton: (id: string) => void
+  visible: boolean;
+  setVisible: (args: boolean) => void;
+  entityItem: Entity;
+  deleteButton: (id: string) => void;
 }
 
 /**
@@ -28,38 +28,32 @@ export default function EntityDetailsModal({ visible, setVisible, entityItem, de
           <Card.Title>{entityItem.title}</Card.Title>
 
           {/* Thumbnail */}
-          <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 10}}>
-            <Thumbnail
-              height={200}
-              width={200}
-              text={entityItem.title.charAt(0)}
-            />
+          <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+            <Thumbnail height={200} width={200} text={entityItem.title.charAt(0)} />
           </View>
 
           {/* Subtitle */}
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <Text style={{paddingTop: 20, paddingBottom: 20}}>
-              {entityItem.subtitle}
-            </Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <Text style={{ paddingTop: 20, paddingBottom: 20 }}>{entityItem.subtitle}</Text>
           </View>
 
-          <Card.Divider/>
-          
+          <Card.Divider />
+
           {/* Buttons */}
-          <View style={{ flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             <View>
               <Button
-                icon={<Icon name='delete' color='#ffffff' />}
-                buttonStyle={{width: 300, backgroundColor: 'red'}}
-                title='Delete' 
+                icon={<Icon name="delete" color="#ffffff" />}
+                buttonStyle={{ width: 300, backgroundColor: 'red' }}
+                title="Delete"
                 onPress={() => deleteButton(entityItem.key as string)}
-                />
+              />
             </View>
             <View>
               <Button
-                icon={<Icon name='close' color='#ffffff' />}
-                buttonStyle={{width: 300,}}
-                title='Close' 
+                icon={<Icon name="close" color="#ffffff" />}
+                buttonStyle={{ width: 300 }}
+                title="Close"
                 onPress={() => setVisible(false)}
               />
             </View>

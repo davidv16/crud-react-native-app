@@ -14,6 +14,6 @@ const App = () => {
       </SafeAreaProvider>
     </View>
   );
-}
+};
 
 export default App;

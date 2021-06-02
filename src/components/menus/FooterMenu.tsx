@@ -4,10 +4,10 @@ import { SpeedDial } from 'react-native-elements';
 
 /* Interface */
 interface Props {
-  menuOpen: boolean,
-  setMenuOpen: (arg: boolean) => void,
-  copyRandomEntity: () => void,
-  addButton: (arg: boolean) => void
+  menuOpen: boolean;
+  setMenuOpen: (arg: boolean) => void;
+  copyRandomEntity: () => void;
+  addButton: (arg: boolean) => void;
 }
 
 /**
@@ -21,18 +21,17 @@ export default function FooterMenu({ menuOpen, setMenuOpen, copyRandomEntity, ad
       {/* Main menu button */}
       <SpeedDial
         isOpen={menuOpen}
-        onOpen={() => { setMenuOpen(true) }}
-        onClose={() => { setMenuOpen(false) }}
+        onOpen={() => {
+          setMenuOpen(true);
+        }}
+        onClose={() => {
+          setMenuOpen(false);
+        }}
         icon={{ name: 'edit', color: '#fff' }}
         openIcon={{ name: 'close', color: '#fff' }}
       >
-
         {/* Menu button "Add Entity" */}
-        <SpeedDial.Action
-          icon={{ name: 'add', color: '#fff' }}
-          title="Add Entity"
-          onPress={() => addButton(true)}
-        />
+        <SpeedDial.Action icon={{ name: 'add', color: '#fff' }} title="Add Entity" onPress={() => addButton(true)} />
 
         {/* Menu button "Copy a random Entity" */}
         <SpeedDial.Action

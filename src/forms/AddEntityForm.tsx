@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 /* interface for the props to be passed in */
 interface Props {
-  visible: boolean,
-  setVisible: (arg: boolean) => void
-  addEntity: (arg: Entity) => void
+  visible: boolean;
+  setVisible: (arg: boolean) => void;
+  addEntity: (arg: Entity) => void;
 }
 
 /**
@@ -31,14 +31,13 @@ export default function AddEntityForm({ visible, setVisible, addEntity }: Props)
     const newEntity: Entity = {
       key: '',
       title: title,
-      subtitle: subtitle
-    }
+      subtitle: subtitle,
+    };
 
     // passes it up to the add Entity function
-    addEntity(newEntity)
+    addEntity(newEntity);
     // and hides the form modal window again
     setVisible(false);
-    
   }
 
   return (
@@ -46,29 +45,18 @@ export default function AddEntityForm({ visible, setVisible, addEntity }: Props)
       <Overlay isVisible={visible} onBackdropPress={() => setVisible(false)}>
         <Input
           placeholder="title"
-          leftIcon={<Icon
-            name='envelope-square'
-            size={24}
-            color='black'
-          />}
+          leftIcon={<Icon name="envelope-square" size={24} color="black" />}
           style={styles}
           onChangeText={(text: string) => setTitle(text)}
         />
         <Input
           placeholder="subtitle"
-          leftIcon={<Icon
-            name='key'
-            size={24}
-            color='black'
-          />}
+          leftIcon={<Icon name="key" size={24} color="black" />}
           style={styles}
           onChangeText={(text: string) => setSubtitle(text)}
         />
 
-        <Button
-          title="Save"
-          onPress={() => handleSubmit()}
-        />
+        <Button title="Save" onPress={() => handleSubmit()} />
       </Overlay>
     </View>
   );

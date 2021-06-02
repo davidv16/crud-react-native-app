@@ -7,8 +7,8 @@ import EntityDetailsModal from './EntityDetailsModal';
 
 /* Interface */
 interface Props {
-  entitiesData: Entity[]
-  deleteItem: (id: string) => void
+  entitiesData: Entity[];
+  deleteItem: (id: string) => void;
 }
 
 /**
@@ -22,14 +22,13 @@ export default function EntityList({ entitiesData, deleteItem }: Props) {
   const initialState = {
     key: '',
     title: '',
-    subtitle: ''
-  }
+    subtitle: '',
+  };
 
   /* Hook to control the visibility of the Entity Details Modal */
-  const [ overlayVisible, setOverlayVisible] = useState<boolean>(false);
+  const [overlayVisible, setOverlayVisible] = useState<boolean>(false);
   /* Hook to access the Entity item being selected from the list to pass to the modal */
-  const [ entityItem, setEntityItem ] = useState<Entity>(initialState);
-
+  const [entityItem, setEntityItem] = useState<Entity>(initialState);
 
   /**
    * @function handleOpenOverlay
@@ -57,18 +56,9 @@ export default function EntityList({ entitiesData, deleteItem }: Props) {
       {/* Loop through the list of Entities */}
       {entitiesData.map((entity: Entity) => (
         /* List item */
-        <ListItem 
-          key={entity.key as React.Key} 
-          bottomDivider
-          onPress={() => handleOpenOverlay(entity) }
-        >
+        <ListItem key={entity.key as React.Key} bottomDivider onPress={() => handleOpenOverlay(entity)}>
           {/* List item thumbnail */}
-          <Thumbnail
-            height={76}
-            width={76}
-            text={entity.title.charAt(0)
-            }
-          />
+          <Thumbnail height={76} width={76} text={entity.title.charAt(0)} />
           {/* List item text content */}
           <ListItem.Content>
             <ListItem.Title>{entity.title}</ListItem.Title>
@@ -76,14 +66,13 @@ export default function EntityList({ entitiesData, deleteItem }: Props) {
           </ListItem.Content>
 
           <EntityDetailsModal
-            visible={overlayVisible} 
+            visible={overlayVisible}
             setVisible={setOverlayVisible}
             entityItem={entityItem}
             deleteButton={handleDelete}
           />
         </ListItem>
-        ))
-      }
+      ))}
     </View>
   );
-};
+}

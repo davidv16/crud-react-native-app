@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import uuid from 'react-native-uuid';
 
-
 /* interfaces */
 import { Entity } from '../models/entity';
 
@@ -15,26 +14,21 @@ import FooterMenu from '../components/menus/FooterMenu';
 import AddEntityForm from '../forms/AddEntityForm';
 
 /* Initial data import */
-import { entitiesData } from '../../entities'
+import { entitiesData } from '../../entities';
 
 /* Import window dimensions */
 const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
 
 export default function HomeScreen() {
-
   /* Hooks */
   /* Hook to store a list of Entities imported from the mock database */
   const [entities, setEntities] = useState<Entity[]>(entitiesData);
-  
+
   /* Hook to control the bottom menu visibility */
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  
+
   /* Hook to control the add Entity form modal visibility */
   const [AddModalOpen, setAddModalOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    console.log(WINDOW_HEIGHT);
-  }, [])
 
   /* Methods */
   /**
@@ -63,7 +57,7 @@ export default function HomeScreen() {
    */
   function deleteEntity(id: string) {
     // looks for the entity uuid in the list and deletes it
-    setEntities([...entities.filter(x => x.key !== id)])
+    setEntities([...entities.filter((x) => x.key !== id)]);
   }
 
   /**
@@ -71,7 +65,7 @@ export default function HomeScreen() {
    * Function to open the Add Entity Modal window
    * and close the footer menu
    */
-  function handleAddModalOpen () {
+  function handleAddModalOpen() {
     setAddModalOpen(true);
     setMenuOpen(false);
   }
@@ -88,37 +82,30 @@ export default function HomeScreen() {
 
   /* View */
   return (
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={{flex: 1}}>
-          <HeaderMenu />
-        </View>
-
-        {/* List of Entities */}
-        <View style={{flex: 1}}>
-          <ListScreen 
-            entitiesData={entities} 
-            deleteItem={deleteEntity}
-          />
-        </View>
-
-        {/* Add new Entity Form */}
-        <AddEntityForm
-          visible={AddModalOpen}
-          setVisible={setAddModalOpen}
-          addEntity={addEntity}
-        />
-
-        {/* Footer button menu */}
-        <View style={styles.footer}>
-          <FooterMenu
-            menuOpen={menuOpen}
-            setMenuOpen={setMenuOpen}
-            copyRandomEntity={handleCopyRandomEntity}
-            addButton={handleAddModalOpen}
-          />
-        </View>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={{ flex: 1 }}>
+        <HeaderMenu />
       </View>
+
+      {/* List of Entities */}
+      <View style={{ flex: 1 }}>
+        <ListScreen entitiesData={entities} deleteItem={deleteEntity} />
+      </View>
+
+      {/* Add new Entity Form */}
+      <AddEntityForm visible={AddModalOpen} setVisible={setAddModalOpen} addEntity={addEntity} />
+
+      {/* Footer button menu */}
+      <View style={styles.footer}>
+        <FooterMenu
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          copyRandomEntity={handleCopyRandomEntity}
+          addButton={handleAddModalOpen}
+        />
+      </View>
+    </View>
   );
 }
 
@@ -126,13 +113,13 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    flex: 1
+    flex: 1,
   },
   footer: {
     position: 'absolute',
     height: 40,
-    left: 0, 
-    top: WINDOW_HEIGHT - 2, 
+    left: 0,
+    top: WINDOW_HEIGHT - 2,
     width: WINDOW_WIDTH,
-}
+  },
 });
