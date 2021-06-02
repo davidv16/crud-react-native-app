@@ -12,11 +12,12 @@ import { Entity } from '../models/entity';
 /* components import */
 import ListScreen from '../components/ListScreen';
 import HeaderMenu from '../components/HeaderMenu';
+import FooterMenu from '../components/FooterMenu';
 
 /* data import */
 import * as listEntities from '../../data.json';
 import { entitiesData } from '../../entities'
-import FooterMenu from '../components/FooterMenu';
+import AddEntityForm from '../forms/AddEntityForm';
 
 export default function HomeScreen() {
 
@@ -25,7 +26,7 @@ export default function HomeScreen() {
 
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  const [AddModalOpen, setAddModalOpen] = useState<boolean>(true);
+  const [AddModalOpen, setAddModalOpen] = useState<boolean>(false);
 
 
   /* Actions */
@@ -70,24 +71,16 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <HeaderMenu />
         <ListScreen entitiesData={entities} />
-        <SpeedDial
-          isOpen={menuOpen}
-          onOpen={() => { setMenuOpen(true) }}
-          onClose={() => { setMenuOpen(false) }}
-          icon={{ name: 'edit', color: '#fff' }}
-          openIcon={{ name: 'close', color: '#fff' }}
-        >
-          <SpeedDial.Action
-            icon={{ name: 'add', color: '#fff' }}
-            title="Add Entity"
-            onPress={() => console.log('Add Something')}
-          />
-          <SpeedDial.Action
-            icon={{ name: 'add-circle', color: '#fff' }}
-            title="Copy a random Entity"
-            onPress={() => copyRandomEntity()}
-          />
-        </SpeedDial>
+        <FooterMenu
+          menuOpen={menuOpen}
+          setMenuOpen={setMenuOpen}
+          copyRandomEntity={copyRandomEntity}
+          addButton={setAddModalOpen}
+        />
+        <AddEntityForm
+          visible={AddModalOpen}
+          setVisible={setAddModalOpen}
+        />
       </View>
     </ThemeProvider>
   );
