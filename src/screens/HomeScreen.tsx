@@ -1,5 +1,5 @@
 /* imports */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import uuid from 'react-native-uuid';
