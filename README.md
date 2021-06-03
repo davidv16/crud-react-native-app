@@ -1,14 +1,13 @@
-## Memento React Native
+# Memento React Native
+Created with React Native for both iOS and Android platforms.
 
-- Created with React Native for both iOS and Android platforms.
+## Install and run
+1. clone from git [repository] (https://github.com/davidv16/)
+2. run npm install from root dir
+3. run npm start and say yes to expo cli install
+4. Run either in browser or through a tunnel to a smartphone
 
-# Install and run
-- clone from git [repository] (https://github.com/davidv16/)
-- run npm install from root dir
-- run npm start and say yes to expo cli install
-- Run either in browser or through a tunnel to a smartphone
-
-# How to use
+## How to use
 1. The App starts up with three pre loaded items in the list.
 2. Press the purple button in the lower right corner and a menu will appear
   - Press "Add Entity" and a modal window with an input form will appear
