@@ -4,10 +4,12 @@ import Thumbnail from '../../elements/Thumbnail';
 import { Entity } from '../../models/entity';
 import { ListItem } from 'react-native-elements';
 import EntityDetailsModal from './EntityDetailsModal';
+import { observer } from 'mobx-react';
+import { useStore } from '../../stores/stores';
+
 
 /* Interface */
 interface Props {
-  entitiesData: Entity[];
   deleteItem: (id: string) => void;
 }
 
@@ -17,7 +19,11 @@ interface Props {
  * @param Props passed down from parent element
  * @returns a list view of entities
  */
-export default function EntityList({ entitiesData, deleteItem }: Props) {
+export default observer(function EntityList({ deleteItem }: Props) {
+
+  const { entityStore } = useStore();
+  const { deleteEntity, entities } = entityStore;
+
   /* Initial Entity state for the Entity hook */
   const initialState = {
     key: '',
@@ -54,7 +60,7 @@ export default function EntityList({ entitiesData, deleteItem }: Props) {
   return (
     <View>
       {/* Loop through the list of Entities */}
-      {entitiesData.map((entity: Entity) => (
+      {entities.map(entity => (
         /* List item */
         <ListItem key={entity.key as React.Key} bottomDivider onPress={() => handleOpenOverlay(entity)}>
           {/* List item thumbnail */}
@@ -76,3 +82,4 @@ export default function EntityList({ entitiesData, deleteItem }: Props) {
     </View>
   );
 }
+)
