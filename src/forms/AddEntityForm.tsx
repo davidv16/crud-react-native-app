@@ -14,6 +14,7 @@ import uuid from 'react-native-uuid';
  * @returns Add Entity Modal View
  */
 export default observer(function AddEntityForm() {
+  /* Hooks from the Mobx Entity Store */
   const { entityStore } = useStore();
   const { addEntityModalOpen, setAddEntityModalOpen, addEntity } = entityStore;
 

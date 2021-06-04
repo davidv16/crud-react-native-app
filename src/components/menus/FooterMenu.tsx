@@ -10,6 +10,7 @@ import { useStore } from '../../stores/stores';
  * @returns The Footer Menu
  */
 export default observer(function FooterMenu() {
+  /* Hooks from the Mobx Entity Store */
   const { entityStore } = useStore();
   const { handleAddModalOpen, footerMenuOpen, setFooterMenuOpen, copyRandomEntity } = entityStore;
 
