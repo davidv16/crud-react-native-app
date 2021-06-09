@@ -1,11 +1,7 @@
 /* imports */
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import uuid from 'react-native-uuid';
-
-/* interfaces */
-import { Entity } from '../models/entity';
+import { observer } from 'mobx-react';
 
 /* components import */
 import ListScreen from '../components/entities/EntityList';
@@ -13,72 +9,23 @@ import HeaderMenu from '../components/menus/HeaderMenu';
 import FooterMenu from '../components/menus/FooterMenu';
 import AddEntityForm from '../forms/AddEntityForm';
 
-/* Initial data import */
-import { entitiesData } from '../../entities';
+/* custom hooks */
+import { useStore } from '../stores/stores';
 
 /* Import window dimensions */
 const { height: WINDOW_HEIGHT, width: WINDOW_WIDTH } = Dimensions.get('window');
 
-export default function HomeScreen() {
-  /* Hooks */
-  /* Hook to store a list of Entities imported from the mock database */
-  const [entities, setEntities] = useState<Entity[]>(entitiesData);
+export default observer(function HomeScreen() {
 
-  /* Hook to control the bottom menu visibility */
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const { entityStore } = useStore();
+  const { loadEntities, entityRegistry } = entityStore;
 
-  /* Hook to control the add Entity form modal visibility */
-  const [AddModalOpen, setAddModalOpen] = useState<boolean>(false);
-
-  /* Methods */
-  /**
-   * @function addEntity
-   * Function to add a new entity.
-   */
-  function addEntity(entity: Entity) {
-    // spreads the entities array and adds a uuid as a key
-    setEntities([...entities, { ...entity, key: uuid.v4() }]);
-  }
-
-  /**
-   * @function copyRandomEntity
-   * Function to get a random item from the entity array and adds it to the array again.
-   */
-  function copyRandomEntity() {
-    // finds a random item in the entities array
-    // and adds it to the entity array.
-    addEntity(entities[Math.floor(Math.random() * entities.length)]);
-  }
-
-  /**
-   * @function deleteEntity
-   * @param id string
-   * Function that deletes an entity from the array by id
-   */
-  function deleteEntity(id: string) {
-    // looks for the entity uuid in the list and deletes it
-    setEntities([...entities.filter((x) => x.key !== id)]);
-  }
-
-  /**
-   * @function handleAddModalOpen
-   * Function to open the Add Entity Modal window
-   * and close the footer menu
-   */
-  function handleAddModalOpen() {
-    setAddModalOpen(true);
-    setMenuOpen(false);
-  }
-
-  /**
-   * @function handleCopyRandomEntity
-   * Function to run the Copy Random Entity procedure
-   * as well as closing the footer menu
-   */
-  function handleCopyRandomEntity() {
-    copyRandomEntity();
-    setMenuOpen(false);
-  }
+  useEffect(() => {
+    //check if we have a loaded entityList in the registry(state)
+    //if not we load them.
+    if (entityRegistry.size < 1) loadEntities();
+    //then pass the entityRegistry.size and loadEntities as a dependency to our useEffect
+  }, [entityRegistry.size, loadEntities])
 
   /* View */
   return (
@@ -90,24 +37,21 @@ export default function HomeScreen() {
 
       {/* List of Entities */}
       <View style={{ flex: 1 }}>
-        <ListScreen entitiesData={entities} deleteItem={deleteEntity} />
+        <ListScreen />
       </View>
 
       {/* Add new Entity Form */}
-      <AddEntityForm visible={AddModalOpen} setVisible={setAddModalOpen} addEntity={addEntity} />
+      <AddEntityForm />
 
       {/* Footer button menu */}
       <View style={styles.footer}>
         <FooterMenu
-          menuOpen={menuOpen}
-          setMenuOpen={setMenuOpen}
-          copyRandomEntity={handleCopyRandomEntity}
-          addButton={handleAddModalOpen}
         />
       </View>
     </View>
   );
 }
+)
 
 /* Styles */
 const styles = StyleSheet.create({

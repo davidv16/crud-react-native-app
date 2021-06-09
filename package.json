@@ -20,6 +20,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "expo": "^41.0.1",
     "expo-status-bar": "~1.0.3",
+    "mobx": "^6.3.2",
+    "mobx-react": "^7.2.0",
     "optionator": "^0.9.1",
     "prettier": "^2.3.0",
     "react": "16.13.1",
@@ -53,13 +55,13 @@
   },
   "private": true,
   "husky": {
-      "hooks": {
-          "pre-commit": "lint-staged"
-      }
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-      "*.{js,ts,tsx}": [
-          "eslint --fix"
-      ]
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
